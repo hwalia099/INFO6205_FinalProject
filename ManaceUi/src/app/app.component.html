@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+    <div class="tic-tac-toe">
+      <div class="game-field" *ngFor="let field of gameState; let i = index" (click)="makeHumanMove(i)">
+        {{field === 'X' || field === 'O' ? field : ''}}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <div *ngIf="playing">
+        <h3>Your Move</h3>
+    </div>
+    <div *ngIf="!playing">
+        <h3>{{winner || "Start a new game"}}</h3>
+    </div>
+    <button mat-raised-button color="primary" *ngIf="!playing" (click)="toggleGame(true)">Start</button>
+    <button mat-raised-button color="primary" *ngIf="playing" (click)="toggleGame(false)">Reset</button>
+
+    <mat-slide-toggle [(ngModel)]="computerFirst">Computer Moves First</mat-slide-toggle>
+  </mat-card-content>
+</mat-card>
+<div *ngIf="isLoading" 
+   style="display: flex; justify-content: center; align-items: center; background: white;">
+<mat-progress-spinner *ngIf="isLoading" color="primary" diameter="100" mode="indeterminate" value="50">
+  </mat-progress-spinner>
+  </div>
