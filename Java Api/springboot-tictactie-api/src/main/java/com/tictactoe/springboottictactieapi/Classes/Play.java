@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 public class Play {
     private final char COMP = 'o';
     private final char HUMAN = 'x';
-    int maxLevel = 5;
+    int maxLevel = 3;
     boolean isNewRecordInserted = false;
 
     private TicTacToe TTT;

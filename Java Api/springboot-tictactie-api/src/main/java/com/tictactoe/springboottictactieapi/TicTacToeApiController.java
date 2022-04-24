@@ -24,6 +24,7 @@ public class TicTacToeApiController {
             board[i][1] = request.get(i).center.charAt(0);
             board[i][2] = request.get(i).right.charAt(0);
         }
+        
         var play = new Play(board);
         return play.computerPlay('o', -1, 4, 0);
     }
