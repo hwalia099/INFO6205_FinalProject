@@ -19,14 +19,17 @@ public class Play {
     public PossiblePlay computerPlay(char symbol, int highest_score, int lowest_score,int level) {
         char opponent; // Opponent's symbol
         int value;
-        if (level == 0) /* Create new hash table */
+        if (level == 0) /* Create new hash table */ {
             configurations = TTT.createDictionary();
             try {
-                FileInputStream fis=new FileInputStream("Menace_self_Learn.dat");
+                FileInputStream fis = new FileInputStream("Menace_self_Learn.dat");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 configurations = (Dictionary) ois.readObject();
 
-            }catch(Exception ex){System.out.println(configurations.toString());}
+            } catch (Exception ex) {
+                System.out.println(configurations.toString());
+            }
+        }
         if (symbol == COMP) {
             opponent = HUMAN;
             value = -1;
@@ -46,16 +49,17 @@ public class Play {
             for (int c = 0; c < board_size; c++) {
                 if (TTT.squareIsEmpty(row, column)) { // Empty position         //check if the position is empty
                     TTT.storePlay(row, column, symbol); // Store next play    //store the symbol in that position if it is empty
-                    if (TTT.wins(symbol) || TTT.isDraw() || (level >= maxLevel))
+                    if (TTT.wins(symbol) || TTT.isDraw() || (level >= maxLevel)) {
                         // Game ending situation or max number of levels
                         // reached
                         reply = new PossiblePlay(TTT.evalBoard(), row, column);
+                    }
                     else {
                         lookupVal = TTT.repeatedConfig(configurations);
                         if (lookupVal != -1)
                             reply = new PossiblePlay(lookupVal, row, column);
                         else {
-                            reply = computerPlay(HUMAN, highest_score, lowest_score, level + 1);
+                            reply = computerPlay(opponent, highest_score, lowest_score, level + 1);
                             if (TTT.repeatedConfig(configurations) == -1) {
                                 isNewRecordInserted = true;
                                 TTT.insertConfig(configurations, reply.getScore(), 0);
@@ -77,7 +81,7 @@ public class Play {
                         else if (symbol == HUMAN && value < lowest_score)
                             lowest_score = value;
 
-                        if (highest_score >= lowest_score)
+                        if (highest_score >= lowest_score || TTT.wins(symbol))
                             return new PossiblePlay(value, bestRow, bestColumn);
                     }
 

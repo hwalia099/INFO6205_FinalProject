@@ -1,0 +1,15 @@
+2022-04-25 16:20:53,674 INFO org.springframework.boot.StartupInfoLogger [main] Starting SpringbootTictactieApiApplication using Java 17.0.2 on DESKTOP-KG479LE with PID 35612 (D:\Project\Git\INFO6205_FinalProject\Java Api\springboot-tictactie-api\target\classes started by ankur in D:\Project\Git\INFO6205_FinalProject\Java Api\springboot-tictactie-api)
+2022-04-25 16:20:53,680 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-04-25 16:20:55,292 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-04-25 16:20:55,311 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-25 16:20:55,312 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-04-25 16:20:55,312 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.60]
+2022-04-25 16:20:55,691 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-04-25 16:20:55,693 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1893 ms
+2022-04-25 16:20:56,655 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-25 16:20:56,820 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-25 16:20:56,843 INFO org.springframework.boot.StartupInfoLogger [main] Started SpringbootTictactieApiApplication in 4.334 seconds (JVM running for 5.142)
+2022-04-25 16:21:10,714 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-25 16:21:10,714 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2022-04-25 16:21:10,716 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2022-04-25 16:21:10,747 ERROR com.tictactoe.springboottictactieapi.TicTacToeApiController [http-nio-8080-exec-1] string
