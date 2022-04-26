@@ -3,6 +3,7 @@ package com.tictactoe.springboottictactieapi;
 import com.tictactoe.springboottictactieapi.Classes.Play;
 import com.tictactoe.springboottictactieapi.Classes.PossiblePlay;
 import com.tictactoe.springboottictactieapi.Classes.RequestObject;
+import com.tictactoe.springboottictactieapi.TrainBot.TicTacToe;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -12,18 +13,20 @@ import java.util.*;
 public class TicTacToeApiController {
 
     Logger logger= LoggerFactory.getLogger(TicTacToeApiController.class);
-    @GetMapping("/welcome")
-    public String Welcome() {
-        logger.error("string");
+    @GetMapping("/train")
+    public String Train() {
+        logger.info("training started");
+        for (int i = 0; i <= 20000; i++) {
+            TicTacToe train = new TicTacToe();
+            train.run();
+        }
+        logger.info("training ended");
         return "Tic Tac Toe";
     }
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "/process", method = RequestMethod.POST)
         public PossiblePlay GetBestMove(@RequestBody List<RequestObject> request) {
-        logger.info("TicTacToe started");
-        logger.info("TicTacToe started");
-        logger.info("TicTacToe started");
-        logger.info("TicTacToe started");
+      //logger.info("Menace Tic-TAc-Toe started...");
         char[][] board = new char[3][3];
         for(int i = 0; i < request.size(); i++) {
             board[i][0] = request.get(i).left.charAt(0);

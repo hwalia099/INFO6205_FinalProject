@@ -1,7 +1,10 @@
 package com.tictactoe.springboottictactieapi.Classes;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
-import java.util.logging.Logger;
+
 
 public class Play {
     private final char COMP = 'o';
@@ -11,15 +14,22 @@ public class Play {
 
     private TicTacToe TTT;
     private Dictionary configurations;
-
+    Logger logger= LoggerFactory.getLogger(Play.class);
     public Play(char[][] board) {
+        logger.info("Menace Tic-Tac-Toe started...");
+        logger.info("New board created of boardsize 3x3...");
         TTT = new TicTacToe(3,3,3, board);
+
     }
 
     public PossiblePlay computerPlay(char symbol, int highest_score, int lowest_score,int level) {
+        String move = symbol == 'x' ? "human" : "computer" ;
+        logger.info("play started to find best move for " + move + " " +
+                 symbol + " for board " + TTT.getGBString());
         char opponent; // Opponent's symbol
         int value;
         if (level == 0) /* Create new hash table */ {
+            logger.info("New hash table created...");
             configurations = TTT.createDictionary();
             try {
                 FileInputStream fis = new FileInputStream("Menace_self_Learn.dat");
@@ -27,7 +37,7 @@ public class Play {
                 configurations = (Dictionary) ois.readObject();
 
             } catch (Exception ex) {
-                System.out.println(configurations.toString());
+                logger.info(configurations.toString());
             }
         }
         if (symbol == COMP) {
@@ -47,11 +57,14 @@ public class Play {
         for (int r = 0; r < board_size; r++) {
             column = (int)(Math.random() * board_size);
             for (int c = 0; c < board_size; c++) {
-                if (TTT.squareIsEmpty(row, column)) { // Empty position         //check if the position is empty
-                    TTT.storePlay(row, column, symbol); // Store next play    //store the symbol in that position if it is empty
+                if (TTT.squareIsEmpty(row, column)) {
+                    logger.info(" "+row+" "+column+" position is Empty");// Empty position         //check if the position is empty
+                    TTT.storePlay(row, column, symbol);
+                    logger.info(" "+symbol+" stored in "+" "+row+" "+column+" position"); // Store next play    //store the symbol in that position if it is empty
                     if (TTT.wins(symbol) || TTT.isDraw() || (level >= maxLevel)) {
                         // Game ending situation or max number of levels
                         // reached
+                        logger.info("Game ending situation or maximum number of levels reached");
                         reply = new PossiblePlay(TTT.evalBoard(), row, column);
                     }
                     else {
@@ -94,14 +107,16 @@ public class Play {
         if(isNewRecordInserted) {
             try
             {
+                logger.info("New Record inserted in the table...");
                 FileOutputStream fos = new FileOutputStream("Menace_self_Learn.dat");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(configurations);
 
             }catch(Exception ex){
-                System.err.println(ex.getMessage());
+                logger.info(ex.getMessage());
             }
         }
+        logger.info("best position returned: "+bestRow+" "+bestColumn);
         return new PossiblePlay(value, bestRow, bestColumn);
     }
 }

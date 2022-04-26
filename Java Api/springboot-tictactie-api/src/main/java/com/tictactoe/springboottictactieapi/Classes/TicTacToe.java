@@ -1,12 +1,14 @@
 package com.tictactoe.springboottictactieapi.Classes;
 
 import com.tictactoe.springboottictactieapi.Exceptions.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TicTacToe {
 
     private char[][] gameBoard;     // GameBoard
     private int inLine;             // Required number of squares in a row to win
-
+    Logger logger= LoggerFactory.getLogger(TicTacToe.class);
 
     /**
      * Creates a new Game Board
@@ -28,6 +30,7 @@ public class TicTacToe {
      */
     public Dictionary createDictionary() {
         Dictionary dictionary = new Dictionary(4599);
+        logger.info("New dictionary created of size 4599");
         return dictionary;
     }
 
@@ -39,11 +42,12 @@ public class TicTacToe {
     public int repeatedConfig(Dictionary configurations) {
         String board = getGBString();
 
-
         if(configurations.get(board) != null){
+            logger.info("gameBoard string exists in dictionary...score returned");
             return configurations.get(board).getScore();
 
         } else {
+            logger.info("gameBoard string doesn't exist in dictionary...-1 returned");
             return -1;
 
         }
@@ -60,8 +64,9 @@ public class TicTacToe {
 
         try {
             configurations.put(new Record(board, score, level));
+            logger.info("Current configuration inserted into the Dictionary");
         } catch (DuplicatedKeyException e) {
-            System.err.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -72,6 +77,7 @@ public class TicTacToe {
      * @param symbol Player X or Computer O
      */
     public void storePlay (int row, int col, char symbol) {
+       logger.info(" "+symbol+" stored at "+row+" "+col+" position");
         gameBoard[row][col] = symbol;
     }
 
@@ -84,8 +90,10 @@ public class TicTacToe {
     public boolean squareIsEmpty (int row, int col){
 
         try {
+            logger.info("check if "+row+" "+col+" is empty");
             return gameBoard[row][col] == ' ';
         } catch (Exception e) {
+            logger.info(e.getMessage());
             return false;
         }
     }
@@ -98,13 +106,11 @@ public class TicTacToe {
     public boolean wins (char symbol) {
 
         int inlineCount = 0;            // Records the number in a row
-
         // Checks each Row for a win
         for (int i = 0; i < gameBoard.length; i++) {
 
             // Reset the counter for the row
             inlineCount = 0;
-
             for (int j = 0; j < gameBoard.length; j++) {
                 if (gameBoard[i][j] == symbol) {
                     inlineCount = inlineCount + 1;      // Add one onto count
@@ -265,6 +271,7 @@ public class TicTacToe {
         }
 
         // Otherwise, return it's a draw
+       logger.info("It is a draw...");
         return true;
     }
 
@@ -293,7 +300,7 @@ public class TicTacToe {
      * Creates and returns a String representation of the current game board
      * @return String representation of gameBoard
      */
-    private String getGBString(){
+    public String getGBString(){
         String board = "";
 
         // Iterate through board double array

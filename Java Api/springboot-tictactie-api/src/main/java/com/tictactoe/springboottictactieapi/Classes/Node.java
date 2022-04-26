@@ -1,5 +1,8 @@
 package com.tictactoe.springboottictactieapi.Classes;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 
 /**
@@ -7,12 +10,14 @@ import java.io.Serializable;
  */
 public class Node implements Serializable {
 
+    Logger logger= LoggerFactory.getLogger(Node.class);
     private Record record;       // Info (TTTRecord) to store in the Node
     private Node nextNode;          // the next connected node
 
     public Node(Record record){
         this.record = record;
         this.nextNode = null;
+    //  logger.info("Node constructor called...");
     }
 
     /**
@@ -35,6 +40,7 @@ public class Node implements Serializable {
      * @return TTTRecord
      */
     public Record getRecord() {
+
         return record;
     }
 
