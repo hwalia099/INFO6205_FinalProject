@@ -293,7 +293,7 @@ public class TicTacToe {
      * Creates and returns a String representation of the current game board
      * @return String representation of gameBoard
      */
-    private String getGBString(){
+    public String getGBString(){
         String board = "";
 
         // Iterate through board double array

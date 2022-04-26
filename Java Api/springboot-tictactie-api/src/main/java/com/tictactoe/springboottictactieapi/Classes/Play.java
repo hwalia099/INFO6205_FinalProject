@@ -1,7 +1,10 @@
 package com.tictactoe.springboottictactieapi.Classes;
 
+import com.tictactoe.springboottictactieapi.TicTacToeApiController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
-import java.util.logging.Logger;
 
 public class Play {
     private final char COMP = 'o';
@@ -12,11 +15,14 @@ public class Play {
     private TicTacToe TTT;
     private Dictionary configurations;
 
+    Logger logger= LoggerFactory.getLogger(Play.class);
+
     public Play(char[][] board) {
         TTT = new TicTacToe(3,3,3, board);
     }
 
     public PossiblePlay computerPlay(char symbol, int highest_score, int lowest_score,int level) {
+        logger.info("play started to find best " + symbol + "move for board" + TTT.getGBString());
         char opponent; // Opponent's symbol
         int value;
         if (level == 0) /* Create new hash table */ {
