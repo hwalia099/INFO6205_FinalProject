@@ -24,5 +24,11 @@ class SpringbootTictactieApiApplicationTests {
         assert possibleMove.getCol() >= 0;
         assert possibleMove.getRow() >= 0;
     }
+    @Test
+    public void noDrawWhenEmpty() {
+    	char[][] c=new char[3][3];
+      TicTacToe tacToe=new TicTacToe(c);
+      assertFalse(tacToe.isDraw());
+    }
 
 }
